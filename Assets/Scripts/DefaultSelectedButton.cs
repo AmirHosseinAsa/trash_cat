@@ -8,7 +8,7 @@ public class DefaultSelectedButton : MonoBehaviour
 
     private void Update()
     {
-        if ((EventSystem.current.currentSelectedGameObject != DefaultButton && !changed) || Input.GetKeyDown(KeyCode.Mouse0))
+        if (EventSystem.current.currentSelectedGameObject != DefaultButton && !changed)
         {
             //Clear selected object
             EventSystem.current.SetSelectedGameObject(null);

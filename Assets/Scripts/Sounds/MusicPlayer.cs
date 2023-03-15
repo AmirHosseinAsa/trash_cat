@@ -28,8 +28,7 @@ public class MusicPlayer : MonoBehaviour
 
         s_Instance = this;
 
-        // As this is one of the first script executed, set that here.
-        Application.targetFrameRate = 30;
+        QualitySettings.vSyncCount = 1;
         AudioListener.pause = false;
         
         DontDestroyOnLoad(gameObject);
