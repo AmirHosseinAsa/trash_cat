@@ -28,7 +28,7 @@ public class MissionEntry : MonoBehaviour
 			descText.color = Color.white;
 			rewardText.color = Color.white;
 
-			claimButton.onClick.AddListener(delegate { owner.Claim(m); } );
+			claimButton.onClick.AddListener(delegate { owner.Claim(m); SaveScript.ChangeMenu = true;  } );
         }
         else
         {

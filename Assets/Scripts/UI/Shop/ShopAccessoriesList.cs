@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEditor;
 
-#if UNITY_ANALYTICS
-using UnityEngine.Analytics;
-#endif
 
 public class ShopAccessoriesList : ShopList
 {

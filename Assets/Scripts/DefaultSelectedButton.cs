@@ -8,7 +8,7 @@ public class DefaultSelectedButton : MonoBehaviour
 
     private void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject != DefaultButton && !changed)
+        if ((EventSystem.current.currentSelectedGameObject != DefaultButton && !changed) || SaveScript.ChangeMenu)
         {
             //Clear selected object
             EventSystem.current.SetSelectedGameObject(null);
@@ -17,11 +17,13 @@ public class DefaultSelectedButton : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(DefaultButton);
 
             changed = true;
+            SaveScript.ChangeMenu = false;
         }
     }
 
     private void OnDisable()
     {
         changed = false;
+        SaveScript.ChangeMenu = true;
     }
 }

@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
-#if UNITY_ANALYTICS
-using UnityEngine.Analytics;
-#endif
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

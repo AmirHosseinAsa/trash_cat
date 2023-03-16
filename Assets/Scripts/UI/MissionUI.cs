@@ -11,12 +11,13 @@ public class MissionUI : MonoBehaviour
 
     public IEnumerator Open()
     {
+        SaveScript.IsPopupOpened = true;
         gameObject.SetActive(true);
 
         foreach (Transform t in missionPlace)
             Addressables.ReleaseInstance(t.gameObject);
 
-        for(int i = 0; i < 3; ++i)
+        for (int i = 0; i < 3; ++i)
         {
             if (PlayerData.instance.missions.Count > i)
             {
@@ -64,5 +65,6 @@ public class MissionUI : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
+        SaveScript.IsPopupOpened = false;
     }
 }
