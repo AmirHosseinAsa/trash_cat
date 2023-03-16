@@ -126,7 +126,7 @@ public class CharacterCollider : MonoBehaviour
         }
         else if (c.gameObject.layer == k_ObstacleLayerIndex)
         {
-            StartCoroutine(SaveScript.Viberation(.5f, .5f));
+      
 
             if (m_Invincible || controller.IsCheatInvincible())
                 return;
@@ -152,6 +152,7 @@ public class CharacterCollider : MonoBehaviour
             }
             else
             {
+                StartCoroutine(SaveScript.Viberation(.5f, .5f));
                 controller.currentLife -= 1;
             }
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class InputFieldControll : MonoBehaviour
 {
-    [SerializeField] GameObject RunButton, OpenLeaderboardButton,LoadoutButton;
+    [SerializeField] GameObject RunButton, OpenLeaderboardButton, LoadoutButton;
     void Update()
     {
         if (SaveScript.IsPopupOpened)
@@ -20,26 +20,6 @@ public class InputFieldControll : MonoBehaviour
             OpenLeaderboardButton.GetComponent<Button>().interactable = true;
             LoadoutButton.GetComponent<Button>().interactable = true;
             gameObject.GetComponent<InputField>().interactable = true;
-        }
-
-        if (IsInputFieldFocused())
-        {
-            if (Input.GetAxisRaw("Vertical") == 1)
-            {
-                //Clear selected object
-                EventSystem.current.SetSelectedGameObject(null);
-
-                //set a new selected object
-                EventSystem.current.SetSelectedGameObject(RunButton);
-            }
-            else if (Input.GetAxisRaw("Vertical") == -1)
-            {
-                //Clear selected object
-                EventSystem.current.SetSelectedGameObject(null);
-
-                //set a new selected object
-                EventSystem.current.SetSelectedGameObject(OpenLeaderboardButton);
-            }
         }
     }
 
