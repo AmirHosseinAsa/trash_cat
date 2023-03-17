@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-
+using UnityEngine.EventSystems;
 
 public class ShopAccessoriesList : ShopList
 {
     public AssetReference headerPrefab;
+    [SerializeField] GameObject AccesoriesButton;
 
     List<Character> m_CharacterList = new List<Character>();
     public override void Populate()
@@ -160,53 +161,12 @@ public class ShopAccessoriesList : ShopList
         PlayerData.instance.AddAccessory(name);
         PlayerData.instance.Save();
 
-#if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
-        var transactionId = System.Guid.NewGuid().ToString();
-        var transactionContext = "store";
-        var level = PlayerData.instance.rank.ToString();
-        var itemId = name;
-        var itemType = "non_consumable";
-        var itemQty = 1;
-
-        AnalyticsEvent.ItemAcquired(
-            AcquisitionType.Soft,
-            transactionContext,
-            itemQty,
-            itemId,
-            itemType,
-            level,
-            transactionId
-        );
-
-        if (cost > 0)
-        {
-            AnalyticsEvent.ItemSpent(
-                AcquisitionType.Soft, // Currency type
-                transactionContext,
-                cost,
-                itemId,
-                PlayerData.instance.coins, // Balance
-                itemType,
-                level,
-                transactionId
-            );
-        }
-
-        if (premiumCost > 0)
-        {
-            AnalyticsEvent.ItemSpent(
-                AcquisitionType.Premium, // Currency type
-                transactionContext,
-                premiumCost,
-                itemId,
-                PlayerData.instance.premium, // Balance
-                itemType,
-                level,
-                transactionId
-            );
-        }
-#endif
-
         Refresh();
+
+        //Clear selected object
+        EventSystem.current.SetSelectedGameObject(null);
+
+        //set a new selected object
+        EventSystem.current.SetSelectedGameObject(AccesoriesButton);
     }
 }

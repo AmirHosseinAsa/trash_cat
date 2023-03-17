@@ -41,9 +41,9 @@ public class GameState : AState
 
     [Header("Tutorial")]
     public Text tutorialValidatedObstacles;
-    public GameObject sideSlideTuto;
-    public GameObject upSlideTuto;
-    public GameObject downSlideTuto;
+    public GameObject sideSlideTutoKeyboard, sideSlideTutoXbox;
+    public GameObject upSlideTutoKeyboard, upSlideTutoXbox;
+    public GameObject downSlideTutoKeyboard, downSlideTutoXbox;
     public GameObject finishTuto;
 
     public Modifier currentModifier = new Modifier();
@@ -111,10 +111,16 @@ public class GameState : AState
         pauseButton.gameObject.SetActive(!trackManager.isTutorial);
         gameOverPopup.SetActive(false);
 
-        sideSlideTuto.SetActive(false);
-        upSlideTuto.SetActive(false);
-        downSlideTuto.SetActive(false);
-        finishTuto.SetActive(false);
+        sideSlideTutoKeyboard.SetActive(false);
+        sideSlideTutoKeyboard.SetActive(false);
+        sideSlideTutoKeyboard.SetActive(false);
+        sideSlideTutoKeyboard.SetActive(false);
+
+        sideSlideTutoXbox.SetActive(false);
+        sideSlideTutoXbox.SetActive(false);
+        sideSlideTutoXbox.SetActive(false);
+        sideSlideTutoXbox.SetActive(false);
+
         tutorialValidatedObstacles.gameObject.SetActive(false);
 
         if (!trackManager.isRerun)
@@ -499,15 +505,18 @@ public class GameState : AState
         switch (trackManager.characterController.currentTutorialLevel)
         {
             case 0:
-                sideSlideTuto.SetActive(value);
+                sideSlideTutoXbox.SetActive(Input.GetJoystickNames().Length > 0 && value);
+                sideSlideTutoKeyboard.SetActive(Input.GetJoystickNames().Length == 0 && value);
                 trackManager.characterController.tutorialWaitingForValidation = value;
                 break;
             case 1:
-                upSlideTuto.SetActive(value);
+                upSlideTutoXbox.SetActive(Input.GetJoystickNames().Length > 0 && value);
+                upSlideTutoKeyboard.SetActive(Input.GetJoystickNames().Length == 0 && value);
                 trackManager.characterController.tutorialWaitingForValidation = value;
                 break;
             case 2:
-                downSlideTuto.SetActive(value);
+                downSlideTutoXbox.SetActive(Input.GetJoystickNames().Length > 0 && value);
+                downSlideTutoKeyboard.SetActive(Input.GetJoystickNames().Length == 0 && value);
                 trackManager.characterController.tutorialWaitingForValidation = value;
                 break;
             case 3:

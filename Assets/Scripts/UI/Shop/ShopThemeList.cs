@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.AddressableAssets;
-
-#if UNITY_ANALYTICS
-using UnityEngine.Analytics;
-#endif
+using UnityEngine.EventSystems;
 
 public class ShopThemeList : ShopList
 {
+    [SerializeField] GameObject ThemeListButton;
+
     public override void Populate()
     {
 		m_RefreshCallback = null;
@@ -97,54 +95,14 @@ public class ShopThemeList : ShopList
         PlayerData.instance.AddTheme(t.themeName);
         PlayerData.instance.Save();
 
-#if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
-        var transactionId = System.Guid.NewGuid().ToString();
-        var transactionContext = "store";
-        var level = PlayerData.instance.rank.ToString();
-        var itemId = t.themeName;
-        var itemType = "non_consumable";
-        var itemQty = 1;
-
-        AnalyticsEvent.ItemAcquired(
-            AcquisitionType.Soft,
-            transactionContext,
-            itemQty,
-            itemId,
-            itemType,
-            level,
-            transactionId
-        );
-        
-        if (t.cost > 0)
-        {
-            AnalyticsEvent.ItemSpent(
-                AcquisitionType.Soft, // Currency type
-                transactionContext,
-                t.cost,
-                itemId,
-                PlayerData.instance.coins, // Balance
-                itemType,
-                level,
-                transactionId
-            );
-        }
-
-        if (t.premiumCost > 0)
-        {
-            AnalyticsEvent.ItemSpent(
-                AcquisitionType.Premium, // Currency type
-                transactionContext,
-                t.premiumCost,
-                itemId,
-                PlayerData.instance.premium, // Balance
-                itemType,
-                level,
-                transactionId
-            );
-        }
-#endif
-
         // Repopulate to change button accordingly.
         Populate();
+
+
+        //Clear selected object
+        EventSystem.current.SetSelectedGameObject(null);
+
+        //set a new selected object
+        EventSystem.current.SetSelectedGameObject(ThemeListButton);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -10,9 +10,16 @@ public class MissionUI : MonoBehaviour
     public RectTransform missionPlace;
     public AssetReference missionEntryPrefab;
     public AssetReference addMissionButtonPrefab;
+    [SerializeField] Button CloseButton;
 
     public IEnumerator Open()
     {
+
+        foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
+        {
+            button.GetComponent<Button>().interactable = false;
+        }
+
         SaveScript.IsPopupOpened = true;
         gameObject.SetActive(true);
 
@@ -48,6 +55,15 @@ public class MissionUI : MonoBehaviour
                 obj.transform.SetParent(missionPlace, false);
             }
         }
+
+        if (GameObject.FindGameObjectsWithTag("ClaimButton").Any())
+        {
+
+            Navigation closeNavigation = CloseButton.navigation;
+            closeNavigation.mode = Navigation.Mode.Explicit;
+            closeNavigation.selectOnDown = GameObject.FindGameObjectsWithTag("ClaimButton").FirstOrDefault().GetComponent<Button>();
+            CloseButton.navigation = closeNavigation;
+        }
     }
 
     public void CallOpen()
@@ -68,5 +84,10 @@ public class MissionUI : MonoBehaviour
     {
         gameObject.SetActive(false);
         SaveScript.IsPopupOpened = false;
+
+        foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
+        {
+            button.GetComponent<Button>().interactable = true;
+        }
     }
 }
