@@ -131,6 +131,8 @@ public class GameState : AState
 
         currentModifier.OnRunStart(this);
 
+
+        Debug.Log("show tutorial : " + !PlayerData.instance.tutorialDone);
         m_IsTutorial = !PlayerData.instance.tutorialDone;
         trackManager.isTutorial = m_IsTutorial;
 
@@ -179,7 +181,7 @@ public class GameState : AState
     {
         if (m_Finished)
         {
-            adsForLifeButton.SetActive(false); //Ads is disabled
+            adsForLifeButton.SetActive(false);
 
             return;
         }
@@ -534,7 +536,7 @@ public class GameState : AState
     {
         PlayerData.instance.tutorialDone = true;
         PlayerData.instance.Save();
-
+        finishTuto.SetActive(false);
         QuitToLoadout();
     }
 }

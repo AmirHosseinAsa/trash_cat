@@ -145,10 +145,10 @@ public class ShopAccessoriesList : ShopList
 
         if (PlayerData.instance.characterAccessories.Contains(compoundName))
         {
+            itm.buyButton.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "Owned";
             itm.buyButton.interactable = false;
             itm.buyButton.image.sprite = itm.disabledButtonSprite;
-            itm.buyButton.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "Owned";
-            Destroy(itm.buyButton.transform.GetComponent<UnityEngine.UI.Button>());
+            //Destroy(itm.buyButton.transform.GetComponent<UnityEngine.UI.Button>());
         }
     }
 

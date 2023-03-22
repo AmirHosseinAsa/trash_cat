@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using UnityEngine.EventSystems;
+using System.Collections;
 
 public class ShopUI : MonoBehaviour
 {
@@ -32,6 +35,13 @@ public class ShopUI : MonoBehaviour
 
         m_OpenList = itemList;
         itemList.Open();
+        StartCoroutine(SetDownItemListButton());
+    }
+
+    IEnumerator SetDownItemListButton()
+    {
+        yield return new WaitForSeconds(.2f);
+        OpenItemList();
     }
 
     void Update()
@@ -45,6 +55,7 @@ public class ShopUI : MonoBehaviour
         m_OpenList.Close();
         itemList.Open();
         m_OpenList = itemList;
+        SetButtonOnDown("Item");
     }
 
     public void OpenCharacterList()
@@ -52,6 +63,7 @@ public class ShopUI : MonoBehaviour
         m_OpenList.Close();
         characterList.Open();
         m_OpenList = characterList;
+        SetButtonOnDown("Character");
     }
 
     public void OpenThemeList()
@@ -68,7 +80,16 @@ public class ShopUI : MonoBehaviour
         m_OpenList = accessoriesList;
     }
 
-
+    void SetButtonOnDown(string buttonName)
+    {
+        if (GameObject.FindGameObjectsWithTag("ClaimButton").Any())
+        {
+            Navigation closeNavigation = GameObject.Find(buttonName).GetComponent<Button>().navigation;
+            closeNavigation.mode = Navigation.Mode.Explicit;
+            closeNavigation.selectOnDown = GameObject.FindGameObjectsWithTag("ClaimButton").FirstOrDefault().GetComponent<Button>();
+            GameObject.Find(buttonName).GetComponent<Button>().navigation = closeNavigation;
+        }
+    }
 
     public void LoadScene(string scene)
     {
@@ -77,6 +98,11 @@ public class ShopUI : MonoBehaviour
 
     public void CloseScene()
     {
+        foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
+        {
+            button.GetComponent<Button>().interactable = true;
+        }
+
         SceneManager.UnloadSceneAsync("shop");
         LoadoutState loadoutState = GameManager.instance.topState as LoadoutState;
         if (loadoutState != null)

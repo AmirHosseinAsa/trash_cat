@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 204033638}
   m_Layer: 5
   m_Name: Accesories
-  m_TagString: Untagged
+  m_TagString: PopupButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5438,7 +5438,7 @@ GameObject:
   - component: {fileID: 1863947576}
   m_Layer: 5
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: PopupButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6011,7 +6011,7 @@ GameObject:
   - component: {fileID: 2041260341}
   m_Layer: 5
   m_Name: Themes
-  m_TagString: Untagged
+  m_TagString: PopupButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6255,7 +6255,7 @@ GameObject:
   - component: {fileID: 2106213340}
   m_Layer: 5
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: PopupButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -58,7 +58,6 @@ public class MissionUI : MonoBehaviour
 
         if (GameObject.FindGameObjectsWithTag("ClaimButton").Any())
         {
-
             Navigation closeNavigation = CloseButton.navigation;
             closeNavigation.mode = Navigation.Mode.Explicit;
             closeNavigation.selectOnDown = GameObject.FindGameObjectsWithTag("ClaimButton").FirstOrDefault().GetComponent<Button>();
